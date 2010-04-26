@@ -43,13 +43,10 @@ bootstrap SDLx::TTF;
 
 =head1 NAME
 
-SDLx::TTF - Extenstions to SDL::TTF
+SDLx::TTF - Extensions for printing text onto surfaces 
 
 =head1 SYNOPSIS
 
-  use SDL;
-  use SDL::TTF;
-  use SDL::TTF::Font;
 
   use SDLx::TTF;
 
