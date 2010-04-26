@@ -7,6 +7,8 @@ require DynaLoader;
 use SDL::Constants ':SDL::TTF';
 our @ISA = qw(Exporter DynaLoader);
 
+our $VERSION = '0.001';
+
 use SDL::Internal::Loader;
 internal_load_dlls(__PACKAGE__);
 

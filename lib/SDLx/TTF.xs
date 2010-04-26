@@ -36,7 +36,7 @@
 #define aTHX_
 #endif
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 #include <string.h>
 #include <stdlib.h>
 

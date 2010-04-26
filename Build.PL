@@ -1,7 +1,40 @@
+use strict;
+use warnings;
 use Module::Build;
+use Alien::SDL;
 # See perldoc Module::Build for details of how this works
 
-Module::Build->new
-    ( module_name     => 'SDLx::TTF',
-      license         => 'perl',
-    )->create_build_script;
+my $prefix = Alien::SDL->config('prefix');
+my $cflags = Alien::SDL->config('cflags');
+$cflags = '-I'
+  . File::Spec->catfile( $prefix, 'include' )
+  ;
+$cflags .= ' -fnested-functions' if $^O =~ /darwin/;
+
+my @linkers = ( Alien::SDL->config('libs') );
+
+
+my $builder = Module::Build->new( 
+      module_name     => 'SDLx::TTF',
+      dist_author     => 'Kartik Thakore <kthakore@cpan.org>',
+      dist_version_from => 'lib/SDLx/TTF.pm',
+      requires =>
+      {
+	'SDL' => '2.404',
+	'Alien::SDL' => '1.3'
+      },
+      configure_requires => {
+	'SDL' => '2.404',
+	'Alien::SDL' => '1.3'
+      },
+       build_requires => {
+	'SDL' => '2.404',
+	'Alien::SDL' => '1.3'
+      },
+    extra_compiler_flags => [ $cflags ],
+    extra_linker_flags   => \@linkers,
+      c_source        => 'src',
+      license         => 'perl'
+    );
+
+$builder->create_build_script();
