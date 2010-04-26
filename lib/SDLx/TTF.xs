@@ -47,7 +47,7 @@
 #include "SFont.h"
 
 #ifdef HAVE_SDL_IMAGE
-#include <SDL_image.h>
+#include <SDL/SDL_image.h>
 
 SFont_FontInfo InternalFont;
 Uint32 SFont_GetPixel(SDL_Surface *Surface, Sint32 X, Sint32 Y)
