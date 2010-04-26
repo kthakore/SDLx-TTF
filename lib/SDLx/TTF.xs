@@ -46,7 +46,6 @@
 
 #include "SFont.h"
 
-#ifdef HAVE_SDL_IMAGE
 #include <SDL/SDL_image.h>
 
 SFont_FontInfo InternalFont;
@@ -264,11 +263,9 @@ void SFont_Input( SDL_Surface *Dest, int x, int y, int PixelWidth, char *text)
     SFont_Input2( Dest, &InternalFont, x, y, PixelWidth, text);
 }
 
-#endif
 
 MODULE = SDLx::TTF	PACKAGE = SDLx::TTF
 
-#ifdef HAVE_SDL_IMAGE
 
 SDL_Surface *
 new ( CLASS, filename )
@@ -304,4 +301,4 @@ TextWidth ( text )
 		RETVAL
 		
 
-#endif
+

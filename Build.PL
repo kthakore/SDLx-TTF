@@ -2,17 +2,19 @@ use strict;
 use warnings;
 use Module::Build;
 use Alien::SDL;
+use SDL::Config;
 # See perldoc Module::Build for details of how this works
+
+die ' Need SDL_IMAGE installed' if !SDL::Config->has('SDL_image');
 
 my $prefix = Alien::SDL->config('prefix');
 my $cflags = Alien::SDL->config('cflags');
 $cflags = '-I'
   . File::Spec->catfile( $prefix, 'include' )
-  . ' -DHAVE_SDL_IMAGE'
-  ;
+    ;
 $cflags .= ' -fnested-functions' if $^O =~ /darwin/;
 
-my @linkers = ( Alien::SDL->config('libs', '-lSDL_image') );
+my @linkers = ( Alien::SDL->config('libs', '-lSDL_image'));
 
 
 my $builder = Module::Build->new( 
