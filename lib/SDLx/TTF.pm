@@ -12,7 +12,6 @@ our $VERSION = '0.001';
 use SDL::Internal::Loader;
 internal_load_dlls(__PACKAGE__);
 
-bootstrap SDLx::TTF;
 
 use base 'Exporter';
 our @EXPORT      = @{ $SDL::Constants::EXPORT_TAGS{'SDL::TTF'} };
@@ -35,6 +34,7 @@ sub print_text{ #print is a horrible name for this
 }
 
 
+bootstrap SDLx::TTF;
 
 1;
 

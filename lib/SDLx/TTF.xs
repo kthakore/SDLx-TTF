@@ -267,7 +267,6 @@ void SFont_Input( SDL_Surface *Dest, int x, int y, int PixelWidth, char *text)
 #endif
 
 MODULE = SDLx::TTF		PACKAGE = SDLx::TTF
-PROTOTYPES : DISABLE
 
 #ifdef HAVE_SDL_IMAGE
 
