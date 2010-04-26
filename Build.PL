@@ -8,10 +8,11 @@ my $prefix = Alien::SDL->config('prefix');
 my $cflags = Alien::SDL->config('cflags');
 $cflags = '-I'
   . File::Spec->catfile( $prefix, 'include' )
+  . '-DHAVE_SDL_IMAGE'
   ;
 $cflags .= ' -fnested-functions' if $^O =~ /darwin/;
 
-my @linkers = ( Alien::SDL->config('libs') );
+my @linkers = ( Alien::SDL->config('libs', '-lSDL_image') );
 
 
 my $builder = Module::Build->new( 

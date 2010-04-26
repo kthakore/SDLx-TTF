@@ -266,13 +266,13 @@ void SFont_Input( SDL_Surface *Dest, int x, int y, int PixelWidth, char *text)
 
 #endif
 
-MODULE = SDLx::TTF		PACKAGE = SDLx::TTF
-PROTOTYPES : DISABLE
+MODULE = SDLx::TTF	PACKAGE = SDLx::TTF
 
 #ifdef HAVE_SDL_IMAGE
 
 SDL_Surface *
-NewFont ( filename )
+new ( CLASS, filename )
+	char *CLASS
 	char *filename
 	CODE:
 		RETVAL = IMG_Load(filename);
