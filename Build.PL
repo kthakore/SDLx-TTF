@@ -2,6 +2,7 @@ use strict;
 use warnings;
 use Module::Build;
 use Alien::SDL;
+use ExtUtils::CBuilder qw();
 use SDL::Config;
 # See perldoc Module::Build for details of how this works
 
@@ -14,10 +15,9 @@ $cflags = '-I'
     ;
 $cflags .= ' -fnested-functions' if $^O =~ /darwin/;
 
-my @linkers = ( Alien::SDL->config('libs', '-lSDL_image'));
+my @linkers = ExtUtils::CBuilder->new->split_like_shell(Alien::SDL->config('libs', '-lSDL_image'));
 
-
-my $builder = Module::Build->new( 
+my $builder = Module::Build->new(
       module_name     => 'SDLx::TTF',
       dist_author     => 'Kartik Thakore <kthakore@cpan.org>',
       dist_version_from => 'lib/SDLx/TTF.pm',
@@ -28,7 +28,8 @@ my $builder = Module::Build->new(
       },
       configure_requires => {
 	'SDL' => '2.404',
-	'Alien::SDL' => '1.3'
+	'Alien::SDL' => '1.3',
+	'ExtUtils::CBuilder' => 0,
       },
        build_requires => {
 	'SDL' => '2.404',
