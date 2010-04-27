@@ -5,13 +5,9 @@ use vars qw(@ISA @EXPORT @EXPORT_OK);
 require Exporter;
 require DynaLoader;
 use SDL::Constants ':SDL::TTF';
-our @ISA = qw(Exporter DynaLoader);
+our @ISA = qw(Exporter DynaLoader SDL::Surface);
 
-our $VERSION = '0.003';
-
-use SDL::Internal::Loader;
-internal_load_dlls(__PACKAGE__);
-
+our $VERSION = '0.004';
 
 use base 'Exporter';
 our @EXPORT      = @{ $SDL::Constants::EXPORT_TAGS{'SDL::TTF'} };
@@ -30,7 +26,7 @@ sub SDL_TEXTWIDTH {
 
 sub print_text{ #print is a horrible name for this
 	my ($surf, $x, $y, @text) = @_;
-	return SDLx::TTF::PutString( $surf, $x,$y,join('', @text));
+	SDLx::TTF::print_string( $surf, $x,$y,join('', @text));
 }
 
 
@@ -59,19 +55,19 @@ SDLx::TTF - Extensions for printing text onto surfaces
   
    #print using $font
    
-   SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
+   SDLx::TTF::print_text( $d, 10, 10, 'Huh' );
 
    my $font2 = SDLx::TTF->new('t/font2.png');
 
    #print using font2
 
-   SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
+   SDLx::TTF::print_text( $d, 10, 10, 'Huh' );
 
    $font->use();
 
    #print using $font
    
-   SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
+   SDLx::TTF::print_text( $d, 10, 10, 'Huh' );
 
 
 
@@ -124,4 +120,3 @@ perl(1), SDL(2).
 
 1;
 # The preceding line will help the module return a true value
-

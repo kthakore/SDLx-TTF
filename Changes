@@ -1,5 +1,8 @@
 Revision history for Perl module SDLx::TTF
 
+0.004 Mon Apr 27 2010
+    - Fixed useage in test and xs code
+
 0.003 Mon Apr 27 2010
     - Fixed linux compile
     - Added more tests/doc

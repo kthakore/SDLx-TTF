@@ -129,9 +129,9 @@ void SFont_PutString2(SDL_Surface *Surface, SFont_FontInfo *Font, int x, int y, 
             i++;
 	}
 	else {
-//	    printf("-%c- %c - %u\n",228,text[i],text[i]);
+	   // warn("-%c- %c - %u\n",228,text[i],text[i]);
 	    ofs=(text[i]-33)*2+1;
-//	    printf("printing %c %d\n",text[i],ofs);
+	   // warn("printing %c %d\n",text[i],ofs);
             srcrect.w = dstrect.w = (Font->CharPos[ofs+2]+Font->CharPos[ofs+1])/2-(Font->CharPos[ofs]+Font->CharPos[ofs-1])/2;
             srcrect.h = dstrect.h = Font->Surface->h-1;
             srcrect.x = (Font->CharPos[ofs]+Font->CharPos[ofs-1])/2;
@@ -149,6 +149,7 @@ void SFont_PutString2(SDL_Surface *Surface, SFont_FontInfo *Font, int x, int y, 
 
 void SFont_PutString(SDL_Surface *Surface, int x, int y, char *text)
 {
+   // warn("putString \n");
     SFont_PutString2(Surface, &InternalFont, x, y, text);
 }
 
@@ -264,42 +265,42 @@ void SFont_Input( SDL_Surface *Dest, int x, int y, int PixelWidth, char *text)
 }
 
 
-MODULE = SDLx::TTF	PACKAGE = SDLx::TTF
+MODULE = SDLx::TTF	PACKAGE = SDLx::TTF	PREFIX = st_
 
 
 SDL_Surface *
-new ( CLASS, filename )
+st_new ( CLASS, filename )
 	char *CLASS
 	char *filename
 	CODE:
+	//	warn( "[xs] new" );
 		RETVAL = IMG_Load(filename);
 		SFont_InitFont(RETVAL);
 	OUTPUT:
 		RETVAL
 
 void
-use ( surface )
+st_use ( surface )
 	SDL_Surface *surface
-	CODE:
-		
+	CODE:		 
+	        //warn( "[xs] use" );
 		SFont_InitFont(surface);
 
 void
-PutString ( surface, x, y, text )
+st_print_string ( surface, x, y, text )
 	SDL_Surface *surface
 	int x
 	int y
 	char *text
 	CODE:
-		SFont_PutString( surface, x, y, text );
+	      // warn( "[xs] ps" );
+	       SFont_PutString( surface, x, y, text );
 
 int
-TextWidth ( text )
+st_TextWidth ( text )
 	char *text
 	CODE:
                 RETVAL = SFont_TextWidth(text);
 	OUTPUT:
 		RETVAL
 		
-
-

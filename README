@@ -13,19 +13,19 @@ SYNOPSIS
       
    #print using $font
        
-   SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
+   SDLx::TTF::print_text( $d, 10, 10, 'Huh' );
 
        my $font2 = SDLx::TTF->new('t/font2.png');
 
        #print using font2
 
-       SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
+       SDLx::TTF::print_text( $d, 10, 10, 'Huh' );
 
        $font->use();
 
        #print using $font
        
-   SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
+   SDLx::TTF::print_text( $d, 10, 10, 'Huh' );
 
 
 
