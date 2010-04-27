@@ -2,3 +2,4 @@
 \.bak$
 ^(?!typemap|script/\w+\.pl|src/[^\.]|lib/[\/\w]+\.(p(m|od)|xs)|inc/|t/[\w\d-]+\.t|Build.PL$|INSTALL$|README$|MANIFEST$|Changes$|TODO$|CONTRIBUTORS$|META.yml|$)
 ^lib/SDLx/TTF/TTF.xs
+^t/font.png
