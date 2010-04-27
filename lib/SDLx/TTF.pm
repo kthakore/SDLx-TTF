@@ -49,9 +49,15 @@ SDLx::TTF - Extensions for printing text onto surfaces
 
 
   use SDLx::TTF;
+  use SDL::App;
 
    #Make a surface
    #Select a font
+   my $d = SDL::App->new( -title => 'app', -width => 200, -height => 200, -depth => 32 );
+
+   SDLx::TTF->new('t/font.png');
+
+   SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
 
    SDLx::TTF::print_text($surf, $x, $y, $text);
 
