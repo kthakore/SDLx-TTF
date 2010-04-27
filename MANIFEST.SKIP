@@ -1,3 +1,4 @@
 \.o$
 \.bak$
-^(?!typemap|script/\w+\.pl|src/[^\.]|test/data/[^\.]|MacOSX/[^\.]|examples/[^\.]+|lib/[\/\w]+\.p(m|od)|inc/|t/[\w\d-]+\.t|t/lib/SDL/TestTool\.pm|Build.PL$|INSTALL$|README$|MANIFEST$|CHANGELOG$|TODO$|CONTRIBUTORS$|META.yml|$)
+^(?!typemap|script/\w+\.pl|src/[^\.]|lib/[\/\w]+\.(p(m|od)|xs)|inc/|t/[\w\d-]+\.t|Build.PL$|INSTALL$|README$|MANIFEST$|Changes$|TODO$|CONTRIBUTORS$|META.yml|$)
+^lib/SDLx/TTF/TTF.xs
