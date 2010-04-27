@@ -14,7 +14,7 @@ can_ok( 'SDLx::TTF', ('print_text', 'PutString') );
 
 my $d = SDL::App->new( -title => 'app', -width => 200, -height => 200, -depth => 32 );
 
-isa_ok( SDLx::TTF->new('t/font.png'), 'SDL::Surface' );
+isa_ok( SDLx::TTF->new('t/font.png'), 'SDLx::TTF' );
 
 SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
 
