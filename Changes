@@ -1,7 +1,12 @@
 Revision history for Perl module SDLx::TTF
 
+0.003 Mon Apr 27 2010
+    - Fixed linux compile
+    - Added more tests/doc
+    - Added use() function
+
 0.002 Mon Apr 26 2010
-    - Added xs and src files for SDlx
+    - Added xs and src files for SDLx
 
 0.001 Mon Apr 26 14:09:30 2010
     - Made to compile and test 

@@ -278,9 +278,10 @@ new ( CLASS, filename )
 		RETVAL
 
 void
-UseFont ( surface )
+use ( surface )
 	SDL_Surface *surface
 	CODE:
+		
 		SFont_InitFont(surface);
 
 void

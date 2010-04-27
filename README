@@ -3,11 +3,32 @@ NAME
 
 SYNOPSIS
       use SDLx::TTF;
+      use SDL::App;
 
        #Make a surface
        #Select a font
+       my $d = SDL::App->new( -title => 'app', -width => 200, -height => 200, -depth => 32 );
 
-       SDLx::TTF::print_text($surf, $x, $y, $text);
+       my $font = SDLx::TTF->new('t/font.png');
+      
+   #print using $font
+       
+   SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
+
+       my $font2 = SDLx::TTF->new('t/font2.png');
+
+       #print using font2
+
+       SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
+
+       $font->use();
+
+       #print using $font
+       
+   SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
+
+
+
 
        #that is it folks ..
 

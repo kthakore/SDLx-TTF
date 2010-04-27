@@ -7,7 +7,7 @@ require DynaLoader;
 use SDL::Constants ':SDL::TTF';
 our @ISA = qw(Exporter DynaLoader);
 
-our $VERSION = '0.002';
+our $VERSION = '0.003';
 
 use SDL::Internal::Loader;
 internal_load_dlls(__PACKAGE__);
@@ -55,11 +55,26 @@ SDLx::TTF - Extensions for printing text onto surfaces
    #Select a font
    my $d = SDL::App->new( -title => 'app', -width => 200, -height => 200, -depth => 32 );
 
-   SDLx::TTF->new('t/font.png');
+   my $font = SDLx::TTF->new('t/font.png');
+  
+   #print using $font
+   
+   SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
+
+   my $font2 = SDLx::TTF->new('t/font2.png');
+
+   #print using font2
 
    SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
 
-   SDLx::TTF::print_text($surf, $x, $y, $text);
+   $font->use();
+
+   #print using $font
+   
+   SDLx::TTF->print_text( $d, 10, 10, 'Huh' );
+
+
+
 
    #that is it folks ..
 
