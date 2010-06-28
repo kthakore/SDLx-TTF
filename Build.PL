@@ -12,7 +12,7 @@ my $prefix = Alien::SDL->config('prefix');
 my $cflags = Alien::SDL->config('cflags');
 $cflags = '-I'
   . File::Spec->catfile( $prefix, 'include' )
-    ;
+    unless $^O =~ /darwin/;
 $cflags .= ' -fnested-functions' if $^O =~ /darwin/;
 
 my @linkers = ExtUtils::CBuilder->new->split_like_shell(Alien::SDL->config('libs', '-lSDL_image'));
