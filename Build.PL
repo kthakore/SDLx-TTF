@@ -9,16 +9,18 @@ use SDL::Config;
 die ' Need SDL_IMAGE installed' if !SDL::Config->has('SDL_image');
 
 my $prefix = Alien::SDL->config('prefix');
-my $cflags = Alien::SDL->config('cflags');
-$cflags = '-I'
-  . File::Spec->catfile( $prefix, 'include' )
-    unless $^O =~ /darwin/;
+#my $cflags = Alien::SDL->config('cflags');
+my $cflags = '-I'
+  . File::Spec->catfile( $prefix, 'include' );
 $cflags .= ' -fnested-functions' if $^O =~ /darwin/;
+
+my @cflags =  ExtUtils::CBuilder->new->split_like_shell( $cflags );
 
 my @linkers = ExtUtils::CBuilder->new->split_like_shell(Alien::SDL->config('libs', '-lSDL_image'));
 
 my $builder = Module::Build->new(
       module_name     => 'SDLx::TTF',
+      dist_name 		=> 'SDLx::TTF',
       dist_author     => 'Kartik Thakore <kthakore@cpan.org>',
       dist_version_from => 'lib/SDLx/TTF.pm',
       requires =>
@@ -35,7 +37,7 @@ my $builder = Module::Build->new(
 	'SDL' => '2.404',
 	'Alien::SDL' => '1.3'
       },
-    extra_compiler_flags => [ $cflags ],
+    extra_compiler_flags => \@cflags ,
     extra_linker_flags   => \@linkers,
       c_source        => 'src',
       license         => 'perl'
