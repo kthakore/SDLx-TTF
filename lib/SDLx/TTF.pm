@@ -45,7 +45,7 @@ SDLx::TTF - Extensions for printing text onto surfaces
 
 
   use SDLx::TTF;
-  use SDL::App;
+  use SDLx::App;
 
    #Make a surface
    #Select a font

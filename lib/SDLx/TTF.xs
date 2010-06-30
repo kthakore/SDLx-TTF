@@ -1,36 +1,37 @@
-//
-// TTF.xs
-//
-// Original SFont code Copyright (C) Karl Bartel 
-// Copyright (C) 2005 David J. Goehrig <dgoehrig@cpan.org>
-//
-// ------------------------------------------------------------------------------
-//
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 2.1 of the License, or (at your option) any later version.
-// 
-// This library is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
-// 
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-//
-// ------------------------------------------------------------------------------
-//
-// Please feel free to send questions, suggestions or improvements to:
-//
-//	David J. Goehrig
-//	dgoehrig@cpan.org
-//
+/* */
+/* TTF.xs */
+/* */
+/* Original SFont code Copyright (C) Karl Bartel  */
+/* Copyright (C) 2005 David J. Goehrig <dgoehrig@cpan.org> */
+/* */
+/* ------------------------------------------------------------------------------ */
+/* */
+/* This library is free software; you can redistribute it and/or */
+/* modify it under the terms of the GNU Lesser General Public */
+/* License as published by the Free Software Foundation; either */
+/* version 2.1 of the License, or (at your option) any later version. */
+/*  */
+/* This library is distributed in the hope that it will be useful, */
+/* but WITHOUT ANY WARRANTY; without even the implied warranty of */
+/* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU */
+/* Lesser General Public License for more details. */
+/*  */
+/* You should have received a copy of the GNU Lesser General Public */
+/* License along with this library; if not, write to the Free Software */
+/* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA */
+/* */
+/* ------------------------------------------------------------------------------ */
+/* */
+/* Please feel free to send questions, suggestions or improvements to: */
+/* */
+/*	David J. Goehrig */
+/*	dgoehrig@cpan.org */
+/* */
 
 #include "EXTERN.h"
 #include "perl.h"
 #include "XSUB.h"
+#include "ppport.h"
 
 #ifndef aTHX_
 #define aTHX_
@@ -61,7 +62,7 @@ Uint32 SFont_GetPixel(SDL_Surface *Surface, Sint32 X, Sint32 Y)
 
    bits = ((Uint8 *)Surface->pixels)+Y*Surface->pitch+X*Bpp;
 
-   // Get the pixel
+   /* Get the pixel */
    switch(Bpp) {
       case 1:
          return *((Uint8 *)Surface->pixels + Y * Surface->pitch + X);
@@ -69,7 +70,7 @@ Uint32 SFont_GetPixel(SDL_Surface *Surface, Sint32 X, Sint32 Y)
       case 2:
          return *((Uint16 *)Surface->pixels + Y * Surface->pitch/2 + X);
          break;
-      case 3: { // Format/endian independent 
+      case 3: { /* Format/endian independent  */
          Uint8 r, g, b;
          r = *((bits)+Surface->format->Rshift/8);
          g = *((bits)+Surface->format->Gshift/8);
@@ -129,9 +130,9 @@ void SFont_PutString2(SDL_Surface *Surface, SFont_FontInfo *Font, int x, int y, 
             i++;
 	}
 	else {
-	   // warn("-%c- %c - %u\n",228,text[i],text[i]);
+	   /* warn("-%c- %c - %u\n",228,text[i],text[i]); */
 	    ofs=(text[i]-33)*2+1;
-	   // warn("printing %c %d\n",text[i],ofs);
+	   /* warn("printing %c %d\n",text[i],ofs); */
             srcrect.w = dstrect.w = (Font->CharPos[ofs+2]+Font->CharPos[ofs+1])/2-(Font->CharPos[ofs]+Font->CharPos[ofs-1])/2;
             srcrect.h = dstrect.h = Font->Surface->h-1;
             srcrect.x = (Font->CharPos[ofs]+Font->CharPos[ofs-1])/2;
@@ -149,7 +150,7 @@ void SFont_PutString2(SDL_Surface *Surface, SFont_FontInfo *Font, int x, int y, 
 
 void SFont_PutString(SDL_Surface *Surface, int x, int y, char *text)
 {
-   // warn("putString \n");
+   /* warn("putString \n"); */
     SFont_PutString2(Surface, &InternalFont, x, y, text);
 }
 
@@ -169,7 +170,7 @@ int SFont_TextWidth2(SFont_FontInfo *Font, char *text)
             i++;
         }
     }
-//    printf ("--%d\n",x);
+/*    printf ("--%d\n",x); */
     return x;
 }
 
@@ -196,8 +197,8 @@ void SFont_InternalInput( SDL_Surface *Dest, SFont_FontInfo *Font, int x, int y,
     SDL_Surface *Back;
     SDL_Rect rect;
     int previous;
-//    int ofs=(text[0]-33)*2+1;
-//    int leftshift=(Font->CharPos[ofs]-Font->CharPos[ofs-1])/2;
+/*    int ofs=(text[0]-33)*2+1; */
+/*    int leftshift=(Font->CharPos[ofs]-Font->CharPos[ofs-1])/2; */
     
     Back = SDL_AllocSurface(Dest->flags,
     			    Dest->w,
@@ -214,7 +215,7 @@ void SFont_InternalInput( SDL_Surface *Dest, SFont_FontInfo *Font, int x, int y,
     SFont_PutString2(Dest,Font,x,y,text);
     SDL_UpdateRects(Dest, 1, &rect);
         
-    // start input
+    /* start input */
     previous=SDL_EnableUNICODE(1);
     blinktimer=SDL_GetTicks();
     while (ch!=SDLK_RETURN) {
@@ -229,7 +230,7 @@ void SFont_InternalInput( SDL_Surface *Dest, SFont_FontInfo *Font, int x, int y,
 		SDL_BlitSurface( Back, NULL, Dest, &rect);
 		SFont_PutString2(Dest, Font, x, y, text);
 		SDL_UpdateRects(Dest, 1, &rect);
-//		printf("%s ## %d\n",text,strlen(text));
+/*		printf("%s ## %d\n",text,strlen(text)); */
 		SDL_WaitEvent(&event);
 	    }
 	}
@@ -239,12 +240,12 @@ void SFont_InternalInput( SDL_Surface *Dest, SFont_FontInfo *Font, int x, int y,
 	    if (blink) {
 		SFont_PutString2(Dest, Font, x+SFont_TextWidth2(Font,text), y, "|");
 		SDL_UpdateRects(Dest, 1, &rect);
-//		SDL_UpdateRect(Dest, x+SFont_TextWidth2(Font,text), y, SFont_TextWidth2(Font,"|"), Font->Surface->h);
+/*		SDL_UpdateRect(Dest, x+SFont_TextWidth2(Font,text), y, SFont_TextWidth2(Font,"|"), Font->Surface->h); */
 	    } else {
 		SDL_BlitSurface( Back, NULL, Dest, &rect);
 		SFont_PutString2(Dest, Font, x, y, text);
 		SDL_UpdateRects(Dest, 1, &rect);
-//		SDL_UpdateRect(Dest, x-(Font->CharPos[ofs]-Font->CharPos[ofs-1])/2, y, PixelWidth, Font->Surface->h);
+/*		SDL_UpdateRect(Dest, x-(Font->CharPos[ofs]-Font->CharPos[ofs-1])/2, y, PixelWidth, Font->Surface->h); */
 	    }
 	}
 	SDL_Delay(1);
@@ -252,7 +253,7 @@ void SFont_InternalInput( SDL_Surface *Dest, SFont_FontInfo *Font, int x, int y,
     }
     text[strlen(text)]='\0';
     SDL_FreeSurface(Back);
-    SDL_EnableUNICODE(previous);  //restore the previous state
+    SDL_EnableUNICODE(previous);  /*restore the previous state */
 }
 
 void SFont_Input2( SDL_Surface *Dest, SFont_FontInfo *Font, int x, int y, int PixelWidth, char *text)
@@ -273,7 +274,7 @@ st_new ( CLASS, filename )
 	char *CLASS
 	char *filename
 	CODE:
-	//	warn( "[xs] new" );
+	/*	warn( "[xs] new" ); */
 		RETVAL = IMG_Load(filename);
 		SFont_InitFont(RETVAL);
 	OUTPUT:
@@ -283,7 +284,7 @@ void
 st_use ( surface )
 	SDL_Surface *surface
 	CODE:		 
-	        //warn( "[xs] use" );
+	        /*warn( "[xs] use" ); */
 		SFont_InitFont(surface);
 
 void
@@ -293,7 +294,7 @@ st_print_string ( surface, x, y, text )
 	int y
 	char *text
 	CODE:
-	      // warn( "[xs] ps" );
+	      /* warn( "[xs] ps" ); */
 	       SFont_PutString( surface, x, y, text );
 
 int

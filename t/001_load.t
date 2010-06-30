@@ -1,7 +1,7 @@
 # -*- perl -*-
 
 use SDL;
-use SDL::App;
+use SDLx::App;
 use SDL::Rect;
 use SDL::Video;
 use SDL::Image;
@@ -20,7 +20,7 @@ unless( $ENV{'SDL_RELEASE_TESTING'} )
 }
 
 
-my $d = SDL::App->new( -title => 'app', -width => 200, -height => 200, -depth => 32 );
+my $d = SDLx::App->new( -title => 'app', -width => 200, -height => 200, -depth => 32 );
 my $s =  SDLx::TTF->new('t/font.png');
 
 isa_ok ($s, 'SDLx::TTF');
