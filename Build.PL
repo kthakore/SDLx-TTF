@@ -23,16 +23,14 @@ my $builder = Module::Build->new(
       dist_version_from => 'lib/SDLx/TTF.pm',
       requires =>
       {
-	'SDL' => '2.404',
+	'SDL' => '2.500_1', 
 	'Alien::SDL' => '1.3'
       },
       configure_requires => {
-	'SDL' => '2.404',
 	'Alien::SDL' => '1.3',
 	'ExtUtils::CBuilder' => 0,
       },
        build_requires => {
-	'SDL' => '2.404',
 	'Alien::SDL' => '1.3'
       },
     extra_compiler_flags => [ $cflags ],

@@ -7,7 +7,7 @@ require DynaLoader;
 use SDL::Constants ':SDL::TTF';
 our @ISA = qw(Exporter DynaLoader SDL::Surface);
 
-our $VERSION = '0.004';
+our $VERSION = '0.005_1';
 
 use base 'Exporter';
 our @EXPORT      = @{ $SDL::Constants::EXPORT_TAGS{'SDL::TTF'} };
